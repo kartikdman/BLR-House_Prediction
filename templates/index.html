@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>BLR House Price Predictor</title>
+  </head>
+  <body class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="card" style="width: 100%; height: 100%; margin-top: 50px">
+          <div class="card-header" style="text-align: center">
+            <h1>Welcome to House Price Predictor</h1>
+          </div>
+          <div class="card-body">
+            <form method="post" accept-charset="utf-8">
+              <div class="row">
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Select the Location:</b></label>
+                  <select
+                    class="selectpicker form-control"
+                    id="location"
+                    name="location"
+                    required="1"
+                  >
+                    {% for location in locations %}
+                    <option value="{{ location }}">{{ location }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Enter BHK:</b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bhk"
+                    name="bhk"
+                    placeholder="Enter BHK"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Enter No.of Bathrooms:</b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bath"
+                    name="bath"
+                    placeholder="Enter Bathrooms"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Enter Square Feet:</b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="total_sqft"
+                    name="total_sqft"
+                    placeholder="Enter Total Square Feet"
+                  />
+                </div>
+                <div class="col-md-18 form-group">
+                  <button
+                    class="btn btn-primary form-control"
+                    onclick="send_data()"
+                  >
+                    Predict Price
+                  </button>
+                </div>
+              </div>
+            </form>
+            <br/>
+            <div class="col-md-12" style="text-align: center">
+              <h3><span id="prediction"></span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+                  function form_handler (event) {
+                  event.preventDefault(); // Don't submit the form normally
+                  }
+
+                  function send_data()
+                  {
+                    document.querySelector('form').addEventListener("submit", form_handler);
+                    var fd=new FormData (document.querySelector('form'));
+                    var xhr= new XMLHttpRequest();
+                    xhr.open('POST', '/predict', true);
+                    document.getElementById("prediction").innerHTML = "Wait predicting Price!....";
+                    xhr.onreadystatechange = function(){
+                      if(xhr.readyState == XMLHttpRequest.DONE) {
+                       document.getElementById('prediction').innerHTML="Prediction: ₹"+xhr.responseText;
+                      }
+                    };
+                    xhr.onload = function(){};
+                    xhr.send(fd);
+                  }
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
