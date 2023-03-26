@@ -1,4 +1,4 @@
-#Bangalore House Price Prediction ✅
+# Bangalore House Price Prediction ✅
 
 #### This project aims to predict the prices of houses in Bangalore based on various features such as location, size, and Square feet or bathrooms.
 
