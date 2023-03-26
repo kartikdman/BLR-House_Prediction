@@ -14,4 +14,6 @@
 
 ## Conclusion 🙂
 
-####The project aims to help potential homebuyers and real estate investors make informed decisions by providing accurate price predictions based on various features. The model developed in this project can be further improved by incorporating more data and features and using advanced modeling techniques.\
+###  The project aims to help potential homebuyers and real estate investors make informed decisions by providing accurate price predictions based on various features. 
+### The model developed in this project can be further improved by incorporating more data and features and using advanced modeling techniques.
+  
